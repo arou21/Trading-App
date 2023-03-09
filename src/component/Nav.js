@@ -16,10 +16,9 @@ export default class Nav extends Component {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
               <Link className="nav-link active" aria-current="page" to="/">Home</Link>
-              <Link className="nav-link" to="/profile">Profile</Link>
+              <Link className="nav-link" to="/profile">Trades</Link>
               <Link className="nav-link" to="/signIn">Signin</Link>
               <Link className="nav-link" to="/signUp">Sign up</Link>
-              <Link className="nav-link" to="/todo">To Do List</Link>
               <Link className="nav-link" to="/news">Market News</Link>
               <Link className="nav-link" to="/account">Account</Link>
               { this.props.user && this.props.user.first_name}
