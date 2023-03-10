@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Article from '../component/Article';
+import Newsfeed from "../images/Newsfeed.jpg";
 
 class NewsComponent extends Component {
   state = {
@@ -41,13 +42,17 @@ class NewsComponent extends Component {
   render() {
     const { newsData } = this.state;
 
-    if (!Array.isArray(newsData) || newsData.length === 0) {
-      return <div>Loading...</div>;
-    }
+    // if (!Array.isArray(newsData) || newsData.length === 0) {
+    //   return <div>Loading...</div>;
+    // }
+    // else
 
     return (
       <div>
-        {newsData.map((article, index) => (
+        <div className="img-wrapper">
+         <img src={Newsfeed} alt="Newsfeed" className='nav-img' />
+        </div>
+        {newsData.length > 0 && newsData.map((article, index) => (
           <Article key={index} articleInfo={article} />
         ))}
       </div>

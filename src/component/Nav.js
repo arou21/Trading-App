@@ -9,23 +9,28 @@ export default class Nav extends Component {
     console.log(loggedin)
     return (
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid"><a className="navbar-brand" href="#">Navbar</a>
+        <div className="container-fluid"><a className="navbar-brand" href="#">Trading App</a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
+              <div className="nav-links">
               <Link className="nav-link active" aria-current="page" to="/">Home</Link>
               <Link className="nav-link" to="/profile">Trades</Link>
-              <Link className="nav-link" to="/signIn">Signin</Link>
-              <Link className="nav-link" to="/signUp">Sign up</Link>
-              <Link className="nav-link" to="/news">Market News</Link>
+              {!loggedin && <Link className="nav-link" to="/signIn">Signin</Link>}
+              {!loggedin && <Link className="nav-link" to="/signUp">Sign up</Link>}
+              <Link className="nav-link" to="/news">Feed</Link>
               <Link className="nav-link" to="/account">Account</Link>
-              { this.props.user && this.props.user.first_name}
-              { loggedin && <LogOutButton logMeOut={this.props.logMeOut}/>}
-
+              <Link className="nav-link" to="/account">Dashboard</Link>
+              <Link className="nav-link" to="/account">Watch list</Link>
               
               
+              </div>
+              <div className='account-wrapper'>
+                <span>{ this.props.user && this.props.user.first_name}</span>
+                { loggedin && <LogOutButton logMeOut={this.props.logMeOut}/>}
+              </div>
             </div>
           </div>
         </div>
