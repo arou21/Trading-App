@@ -21,7 +21,7 @@ export default class LogOutButton extends Component {
        return <Navigate to="/"/> 
     }
     return (
-        <button onClick={this.onclick}type="submit" class="btn btn-primary">LogOut</button>
+        <button onClick={this.onclick}type="submit" className="btn btn-primary">LogOut</button>
     )
   }
 }

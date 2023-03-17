@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import LogOutButton from './LogOutButton';
+import DropdownItem from 'react-bootstrap/esm/DropdownItem';
 
 export default class Nav extends Component {
   render() {
-    const loggedin=Object.keys(this.props.user).length>0
-        console.log(this.props.user)
+    const loggedin = Object.keys(this.props.user).length > 0
+    console.log(this.props.user)
     console.log(loggedin)
     return (
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -16,20 +17,31 @@ export default class Nav extends Component {
           <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div className="navbar-nav">
               <div className="nav-links">
-              <Link className="nav-link active" aria-current="page" to="/">Home</Link>
-              <Link className="nav-link" to="/profile">Trades</Link>
-              {!loggedin && <Link className="nav-link" to="/signIn">Signin</Link>}
-              {!loggedin && <Link className="nav-link" to="/signUp">Sign up</Link>}
-              <Link className="nav-link" to="/news">Feed</Link>
-              <Link className="nav-link" to="/account">Account</Link>
-              <Link className="nav-link" to="/account">Dashboard</Link>
-              <Link className="nav-link" to="/account">Watch list</Link>
-              
-              
+                <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+                <Link className="nav-link" to="/profile">Trades</Link>
+                {!loggedin && <Link className="nav-link" to="/signIn">Signin</Link>}
+                {!loggedin && <Link className="nav-link" to="/signUp">Sign up</Link>}
+                <Link className="nav-link" to="/news">Feed</Link>
+                <Link className="nav-link" to="/account">Account</Link>
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown link
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li><a className="dropdown-item" href="#">Action</a></li>
+                    <li><a className="dropdown-item" href="#">Another action</a></li>
+                    <li><a className="dropdown-item" href="#">Something else here</a></li>
+                  </ul>
+                </li>
+                <Link className="nav-link" to="/account">Dashboard</Link>
+                <Link className="nav-link" to="/account">Watch list</Link>
+                <Link className="nav-link" to="/buystock">Buystock</Link>
+
+
               </div>
               <div className='account-wrapper'>
-                <span>{ this.props.user && this.props.user.first_name}</span>
-                { loggedin && <LogOutButton logMeOut={this.props.logMeOut}/>}
+                <span>{this.props.user && this.props.user.first_name}</span>
+                {loggedin && <LogOutButton logMeOut={this.props.logMeOut} />}
               </div>
             </div>
           </div>

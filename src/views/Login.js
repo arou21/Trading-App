@@ -47,7 +47,7 @@ const theme = createTheme();
         }
         console.log(reqBody)
     
-        const url = 'http://localhost:5000/login'
+        const url = 'http://localhost:5000/api/login'
         const options = {
           method: "POST",
           headers: {

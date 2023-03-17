@@ -5,6 +5,7 @@ import Signup from './views/Signup';
 import Nav from './component/Nav';
 import News from './views/News';
 import Account from './views/Account';
+import Buystock from './views/Buystock'
 
 // import ToDo from './views/ToDo';
 // import Profile from './views/Profile';
@@ -35,6 +36,7 @@ export default function App() {
            <Route path='/signup' element={<Signup/>}/>
            <Route path='/news' element={<News/>}/>
            <Route path='/account' element={<Account/>}/>
+           <Route path='/buystock' element={<Buystock user={user}/>}/>
            
            {/* <Route path='/todo' element={<ToDo myList={this.state.myList} handleToDoSubmit={this.addToDo} deleteToDo={this.deleteToDo}/>}/> */}
            {/* <Route path='/profile' element={<Profile/>}/> */}

@@ -261,22 +261,22 @@ export default function SignUp() {
 //       <form className='col-4' onSubmit={handleSubmit}>
         
 
-//         <label for="exampleInputFirstName" class="form-label">First Name</label>
-//         <input type="firstName" class="form-control" id="exampleInputFirstName" aria-describedby="emailHelp"></input>
-//         <label for="exampleInputLastName" class="form-label">Last Name</label>
-//         <input type="lastName" class="form-control" id="exampleInputLastName" aria-describedby="emailHelp"></input>
-//         <label for="exampleInputEmail1" class="form-label">Email address</label>
-//         <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
+//         <label for="exampleInputFirstName" className="form-label">First Name</label>
+//         <input type="firstName" className="form-control" id="exampleInputFirstName" aria-describedby="emailHelp"></input>
+//         <label for="exampleInputLastName" className="form-label">Last Name</label>
+//         <input type="lastName" className="form-control" id="exampleInputLastName" aria-describedby="emailHelp"></input>
+//         <label for="exampleInputEmail1" className="form-label">Email address</label>
+//         <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
 
 
-//         <div class="mb-3">
-//           <label for="exampleInputPassword1" class="form-label">Password</label>
-//           <input type="password" class="form-control" id="exampleInputPassword1"></input>
-//           <label for="confirmPassword" class="form-label">Confirm Password</label>
-//           <input type="conifrmPassword" class="form-control" id="ConfirmPassword"></input>
+//         <div className="mb-3">
+//           <label for="exampleInputPassword1" className="form-label">Password</label>
+//           <input type="password" className="form-control" id="exampleInputPassword1"></input>
+//           <label for="confirmPassword" className="form-label">Confirm Password</label>
+//           <input type="conifrmPassword" className="form-control" id="ConfirmPassword"></input>
 //         </div>
 
-//         <button type="submit" class="btn btn-primary">Sign Up</button>
+//         <button type="submit" className="btn btn-primary">Sign Up</button>
 //       </form>
 //     </div>
 //     </div>
