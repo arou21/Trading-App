@@ -1,82 +1,87 @@
-import React, { useState, useEffect } from "react"
-import { Navigate } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 // import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Paper from "@mui/material/Paper";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Wallstreet from "../images/Wallstreet.jpg";
+import { setCredentials } from "../fetch";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}>
+      {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
 
 const theme = createTheme();
-  
-    export default function SignIn({logMeIn}) {
-      const [redirect, setRedirect] = useState(false);
-    
-      const handleSubmit = async (e) => {
-        e.preventDefault();
-        
-        const email = e.target[0].value;
-        const password = e.target[2].value;
-       
-    
-        const reqBody = {
-          email: email,
-          password: password
-        }
-        console.log(reqBody)
-    
-        const url = 'http://localhost:5000/api/login'
-        const options = {
-          method: "POST",
-          headers: {
-            Authorization: "Basic " + btoa(email+":" + password)
-          }
-        //   body: JSON.stringify(reqBody),
-        //   headers: {
-        //     "Content-Type": 'application/json'
-        //   }
-        }
-        console.log(options)
-    
-    
-        const res = await fetch(url, options);
-        const success = res.status == 200
-        const data = await res.json()
-        if (success) {
-        logMeIn(data.user)
-          setRedirect(true)
-          
-        }
-    
-      }
-      if (redirect) {
-        return < Navigate replace to='/'></Navigate>
-      }
+
+export default function SignIn({ logMeIn }) {
+  const [redirect, setRedirect] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const email = e.target[0].value;
+    const password = e.target[2].value;
+
+    const reqBody = {
+      email: email,
+      password: password,
+    };
+    console.log(reqBody);
+    setCredentials(email, password);
+
+    const url = "http://localhost:5000/api/login";
+    const options = {
+      method: "POST",
+      headers: {
+        Authorization: "Basic " + btoa(email + ":" + password),
+      },
+      //   body: JSON.stringify(reqBody),
+      //   headers: {
+      //     "Content-Type": 'application/json'
+      //   }
+    };
+    console.log(options);
+
+    const res = await fetch(url, options);
+    const success = res.status == 200;
+    const data = await res.json();
+
+    setCredentials(email, password);
+
+    if (success) {
+      logMeIn(data.user);
+      setRedirect(true);
+    }
+  };
+  if (redirect) {
+    return <Navigate replace to="/"></Navigate>;
+  }
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
           item
@@ -84,13 +89,15 @@ const theme = createTheme();
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(' + Wallstreet+ ')',
+            backgroundImage: "url(" + Wallstreet + ")",
             // backgroundImage: 'url(https://source.unsplash.com/random)',
-            backgroundRepeat: 'no-repeat',
+            backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+              t.palette.mode === "light"
+                ? t.palette.grey[50]
+                : t.palette.grey[900],
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -98,18 +105,21 @@ const theme = createTheme();
             sx={{
               my: 8,
               mx: 4,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}>
+            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <Box
+              component="form"
+              noValidate
+              onSubmit={handleSubmit}
+              sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -138,8 +148,7 @@ const theme = createTheme();
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-              >
+                sx={{ mt: 3, mb: 2 }}>
                 Sign In
               </Button>
               <Grid container>
