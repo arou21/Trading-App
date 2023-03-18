@@ -2,7 +2,7 @@ const credentials = {
   token: null,
 };
 
-export const apiFetch = (url, body, config) => {
+export const apiFetch = (url, body, config, base = process.env.REACT_APP_API_URI) => {
   const options = {
     method: "GET",
     ...config,

@@ -10,10 +10,7 @@ export default class Nav extends Component {
     console.log(this.props.user);
     console.log(loggedin);
     return (
-      <Stack
-        component={"nav"}
-        direction="row"
-        className="navbar navbar-expand-lg bg-body-tertiary">
+      <Stack component={"nav"} direction="row" className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">
             Trading App
@@ -34,52 +31,39 @@ export default class Nav extends Component {
                 <Link className="nav-link active ml-auto" aria-current="page" to="/">
                   Home
                 </Link>
-                <Link className="nav-link" to="/profile">
-                  Trades
-                </Link>
-
                 <Link className="nav-link" to="/news">
                   Feed
                 </Link>
-                <Link className="nav-link" to="/account">
-                  Account
+                <Link className="nav-link" to="/MarketData">
+                  Market
                 </Link>
                 <li className="nav-item dropdown">
-                  <a
-                    className="nav-link dropdown-toggle"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    Dropdown link
+                  <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Account
                   </a>
                   <ul className="dropdown-menu">
                     <li>
-                      <a className="dropdown-item" href="#">
-                        Action
-                      </a>
+                      <Link className="dropdown-item" to="/account">
+                        Dashboard
+                      </Link>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="#">
-                        Another action
-                      </a>
+                      <Link className="dropdown-item" to="/account">
+                        Watch list
+                      </Link>
                     </li>
                     <li>
-                      <a className="dropdown-item" href="#">
-                        Something else here
-                      </a>
+                      <Link className="dropdown-item" to="/buystock">
+                        Buystock
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className="dropdown-item" to="/trade">
+                        Trade
+                      </Link>
                     </li>
                   </ul>
                 </li>
-                <Link className="nav-link" to="/account">
-                  Dashboard
-                </Link>
-                <Link className="nav-link" to="/account">
-                  Watch list
-                </Link>
-                <Link className="nav-link" to="/buystock">
-                  Buystock
-                </Link>
               </div>
               <Stack direction="row" className="xaccount-wrapper">
                 <span>{this.props.user && this.props.user.first_name}</span>

@@ -1,0 +1,12 @@
+id: account_info.id ,#:  # The unique identifier for the account.
+account_number: account_info.account_number ,#:  # The account number associated with the account.
+status: account_info.status ,#:  # The current status of the account, either "ACTIVE" or "SUSPENDED".
+currency: account_info.currency ,#:  # The base currency used for the account.
+buying_power: account_info.buying_power ,#:  # The amount of buying power available for the account.
+cash: account_info.cash ,#:  # The amount of cash available for the account.
+portfolio_value: account_info.portfolio_value ,#:  # The total value of all assets in the account, including cash.
+pattern_day_trader: account_info.pattern_day_trader ,#:  # A boolean indicating whether the account is classified as a pattern day trader.
+trading_blocked: account_info.trading_blocked ,#:  # A boolean indicating whether trading is currently blocked for the account.
+transfers_blocked: account_info.transfers_blocked ,#:  # A boolean indicating whether transfers are currently blocked for the account.
+account_blocked: account_info.account_blocked ,#:  # A boolean indicating whether the account is currently blocked for any reason.
+created_at: account_info.created_at ,#:  # The date and time when the account was created.

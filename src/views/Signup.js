@@ -1,31 +1,36 @@
 // import * as React from 'react';
-import React, { useState, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import Login from "./Login";
 
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { apiFetch } from "../fetch";
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}>
+      {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{' '}
+      </Link>{" "}
       {new Date().getFullYear()}
-      {'.'}
+      {"."}
     </Typography>
   );
 }
@@ -36,8 +41,8 @@ export default function SignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(e.target[3])
-    console.log(e.target[3].value)
+    console.log(e.target[3]);
+    console.log(e.target[3].value);
     const first_name = e.target[0].value;
     const last_name = e.target[2].value;
     const username = e.target[4].value;
@@ -49,43 +54,41 @@ export default function SignUp() {
       first_name: first_name,
       last_name: last_name,
       email: email,
-      password: password
-    }
-    console.log(reqBody)
+      password: password,
+    };
+    console.log(reqBody);
 
-    const url = 'http://localhost:5000/signup'
+    const url = "http://localhost:5000/api/signup";
     const options = {
       method: "POST",
       body: JSON.stringify(reqBody),
       headers: {
-        "Content-Type": 'application/json'
-      }
-    }
+        "Content-Type": "application/json",
+      },
+    };
     if (password !== confirmPassword) {
-      console.log('password does not match')
+      console.log("password does not match");
     }
 
-
-    const res = await fetch(url, options);
-    const success = res.status ===200
+    const res = await apiFetch(url, reqBody, { method: "POST" });
+    const success = res.status === 200;
     if (success) {
-      setRedirect(true)
+      setRedirect(true);
     }
-
-  }
+  };
   if (redirect) {
-    return < Navigate replace to='/signIn'></Navigate>
+    return <Navigate replace to="/signIn"></Navigate>;
   }
 
-// export default function SignUp() {
-//   const handleSubmit = (event) => {
-//     event.preventDefault();
-//     const data = new FormData(event.currentTarget);
-//     console.log({
-//       email: data.get('email'),
-//       password: data.get('password'),
-//     });
-//   };
+  // export default function SignUp() {
+  //   const handleSubmit = (event) => {
+  //     event.preventDefault();
+  //     const data = new FormData(event.currentTarget);
+  //     console.log({
+  //       email: data.get('email'),
+  //       password: data.get('password'),
+  //     });
+  //   };
 
   return (
     <ThemeProvider theme={theme}>
@@ -94,18 +97,21 @@ export default function SignUp() {
         <Box
           sx={{
             marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+          <Box
+            component="form"
+            noValidate
+            onSubmit={handleSubmit}
+            sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -134,10 +140,8 @@ export default function SignUp() {
                   fullWidth
                   id="user name"
                   label="Username"
-
                   name="username"
                   autoComplete="username"
-
                 />
               </Grid>
               <Grid item xs={12}>
@@ -174,7 +178,9 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  control={
+                    <Checkbox value="allowExtraEmails" color="primary" />
+                  }
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
@@ -183,8 +189,7 @@ export default function SignUp() {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+              sx={{ mt: 3, mb: 2 }}>
               Sign Up
             </Button>
             <Grid container justifyContent="flex-end">
@@ -239,7 +244,6 @@ export default function SignUp() {
 //       console.log('password does not match')
 //     }
 
-
 //     const res = await fetch(url, options);
 //     const success = res.status == 200
 //     if (success) {
@@ -253,13 +257,11 @@ export default function SignUp() {
 //   return (
 //     <div>
 
-      
 //       <div className='text-center my-5'>
 //       <h1>Sign Up</h1>
 //       <div className='d-flex justify-content-center text-center'>
-      
+
 //       <form className='col-4' onSubmit={handleSubmit}>
-        
 
 //         <label for="exampleInputFirstName" className="form-label">First Name</label>
 //         <input type="firstName" className="form-control" id="exampleInputFirstName" aria-describedby="emailHelp"></input>
@@ -267,7 +269,6 @@ export default function SignUp() {
 //         <input type="lastName" className="form-control" id="exampleInputLastName" aria-describedby="emailHelp"></input>
 //         <label for="exampleInputEmail1" className="form-label">Email address</label>
 //         <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"></input>
-
 
 //         <div className="mb-3">
 //           <label for="exampleInputPassword1" className="form-label">Password</label>
