@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Article from "../component/Article";
 import TextField from "@mui/material/TextField";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -17,32 +17,38 @@ import { Api } from "../api";
     status,
  * }} Order
  */
+
 const theme = createTheme();
-export default function Buystock(props) {
+
+export default function BuyStock(props) {
   const [message, setMessage] = useState("");
-  const [accountInfo, setAccountInfo] = useState(/**@type {IAccount}*/ (null));
+  const [accountInfo, setAccountInfo] = useState(null);
   const [openStockBuySnack, setOpenStockBuySnack] = useState({
     isOpen: false,
     message: "",
   });
-  const [orders, setOrders] = useState(/** @type {Order[]} */ ([]));
+  const [orders, setOrders] = useState([]);
 
   const fetchOrders = () => {
     apiFetch("http://localhost:5000/api/orders")
       .then((res) => res.json())
       .then((resOrders) => {
         setOrders(resOrders);
+      })
+      .catch((error) => {
+        console.error("Error fetching orders", error);
       });
   };
 
   const getAccountInfo = () => {
     Api.getAccount()
-      .then((/** @type {IAccount}*/ res) => {
+      .then((res) => {
         console.log({ account: res });
         setAccountInfo(res);
       })
-
-      .catch(console.log);
+      .catch((error) => {
+        console.error("Error getting account info", error);
+      });
   };
 
   const handleSubmit = async (e) => {
@@ -67,8 +73,7 @@ export default function Buystock(props) {
       body: JSON.stringify(reqBody),
     };
 
-    apiFetch(url, reqBody, { method: "POST" })
-      // fetch(url, options)
+    apiFetch(url, options)
       .then((response) => response.json())
       .then((response) => {
         setOpenStockBuySnack({
@@ -78,9 +83,9 @@ export default function Buystock(props) {
         fetchOrders();
       })
       .catch((error) => {
-        // show snack with failure message
+        console.error("Error buying stock", error);
         setOpenStockBuySnack({
-          isOpen: false,
+          isOpen: true,
           message: "Error: stock purchase was unsuccessful",
         });
       });
@@ -95,24 +100,21 @@ export default function Buystock(props) {
     <>
       <Stack direction="horizontal" p={{ sm: 5, lg: 15 }} gap={2}>
         {/* purchase form */}
-
         <Box component={Paper} width={"20%"} xs={{ padding: { md: 10, sm: 5 } }}>
           <Stack gap={2} direction="column" component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }} padding={4}>
             <TextField label="Current Balance" value={accountInfo?.cash ?? "NA"} disabled></TextField>
+            <TextField label="Buying Power" value={accountInfo?.buying_power ?? "NA"} disabled></TextField>
             <TextField margin="normal" required fullWidth name="symbol" label="symbol" type="text" id="symbol" />
             <TextField margin="normal" required fullWidth name="quantity" label="qty" type="qty" id="qty" />
             <Button type="submit" variant="contained">
               Submit Order
             </Button>
-
             <Button onClick={getAccountInfo}>get balance</Button>
           </Stack>
         </Box>
-
         {/* history */}
         <Stack direction="column">
           <h2>History (stocks)</h2>
-
           <Box component="ul" pt={3}>
             {orders.map((t) => (
               <Box pb={3} component="li" key={t.id} display="flex" flexDirection={"row"} gap={2}>
@@ -128,5 +130,6 @@ export default function Buystock(props) {
       </Stack>
       <Snackbar open={openStockBuySnack.isOpen} autoHideDuration={6000} message={openStockBuySnack.message} />
     </>
-  );
-}
+  )
+};
+  
