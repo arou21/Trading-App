@@ -59,7 +59,7 @@ export default class Nav extends Component {
                     </li>
                     <li>
                       <Link className="dropdown-item" to="/trade">
-                        Trade
+                        Positions
                       </Link>
                     </li>
                   </ul>
