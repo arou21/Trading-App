@@ -14,6 +14,7 @@ import MarketData from "./views/MarketData";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import { loadCredentials, setCredentials } from "./fetch";
 import Trade from "./views/Trade";
+import Stockwatch from "./views/Stockwatch";
 
 export default function App() {
   const [user, setUser] = useState({});
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/buystock" element={<Buystock user={user} />} />
           <Route path="/marketdata" element={<MarketData />} />
           <Route path="/trade" element={<Trade />} />
+          <Route path="/Stockwatch" element={<Stockwatch user={user} />} />
 
           {/* <Route path='/todo' element={<ToDo myList={this.state.myList} handleToDoSubmit={this.addToDo} deleteToDo={this.deleteToDo}/>}/> */}
           {/* <Route path='/profile' element={<Profile/>}/> */}

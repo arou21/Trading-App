@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 
-function App() {
-  const [data, setData] = useState(null);
+// function App() {
+//   const [data, setData] = useState(null);
 
-  const handleClick = async () => {
-    const res = await fetch('https://api.alpaca.markets');
-    const jsonData = await res.json();
-    setData(jsonData);
-    console.log(jsonData);   
-  }
+//   const handleClick = async () => {
+//     const res = await fetch('https://api.alpaca.markets');
+//     const jsonData = await res.json();
+//     setData(jsonData);
+//     console.log(jsonData);   
+//   }
 
-  return (
-    <div>
-      <h1>API Example</h1>
-      <button onClick={handleClick}>Get Data</button>
-      <div>
-        {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
-      </div>
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <h1>API Example</h1>
+//       <button onClick={handleClick}>Get Data</button>
+//       <div>
+//         {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+//       </div>
+//     </div>
+//   );
+// }
 
 // export default App;
 

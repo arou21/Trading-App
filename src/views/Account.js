@@ -1,66 +1,66 @@
-import React, { Component } from 'react';
-import Article from '../component/Article';
-import Transactions from "../images/Transactions.jpg";
+// import React, { Component } from 'react';
+// import Article from '../component/Article';
+// import Transactions from "../images/Transactions.jpg";
 
-class NewsComponent extends Component {
-  state = {
-    newsData: []
-  }
+// class NewsComponent extends Component {
+//   state = {
+//     newsData: []
+//   }
 
-  componentDidMount() {
-    this.getNewsData();
-  }
+//   componentDidMount() {
+//     this.getNewsData();
+//   }
 
-  async getNewsData() {
-    try {
-      const apiToken = 'D3tkz0oplu4NP8gJ1xcvKuHRXsTWK0jz7SCrNyGS';
-      const symbols = 'msft,fb';
-      const limit = '50';
+//   async getNewsData() {
+//     try {
+//       const apiToken = 'D3tkz0oplu4NP8gJ1xcvKuHRXsTWK0jz7SCrNyGS';
+//       const symbols = 'msft,fb';
+//       const limit = '50';
 
-      const params = {
-        api_token: apiToken,
-        symbols: symbols,
-        limit: limit
-      };
+//       const params = {
+//         api_token: apiToken,
+//         symbols: symbols,
+//         limit: limit
+//       };
 
-      const encodedParams = Object.keys(params)
-        .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
-        .join('&');
+//       const encodedParams = Object.keys(params)
+//         .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(params[key]))
+//         .join('&');
 
-      const requestOptions = {
-        method: 'GET'
-      };
+//       const requestOptions = {
+//         method: 'GET'
+//       };
 
-      const response = await fetch(`https://api.marketaux.com/v1/news/all?${encodedParams}`, requestOptions);
-      const newsData = await response.json();
-      this.setState({ newsData });
-    } catch (error) {
-      console.error(error);
-    }
-  }
+//       const response = await fetch(`https://api.marketaux.com/v1/news/all?${encodedParams}`, requestOptions);
+//       const newsData = await response.json();
+//       this.setState({ newsData });
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   }
 
-  render() {
-    const { newsData } = this.state;
+//   render() {
+//     const { newsData } = this.state;
 
-    // if (!Array.isArray(newsData) || newsData.length === 0) {
-    //   return <div>Loading...</div>;
-    // }
-    // else
+//     // if (!Array.isArray(newsData) || newsData.length === 0) {
+//     //   return <div>Loading...</div>;
+//     // }
+//     // else
 
-    return (
-      <div>
-        <div className="img-wrapper">
-         <img src={Transactions} alt="Newsfeed" className='nav-img' />
-        </div>
-        {newsData.length > 0 && newsData.map((article, index) => (
-          <Article key={index} articleInfo={article} />
-        ))}
-      </div>
-    );
-  }
-}
+//     return (
+//       <div>
+//         <div className="img-wrapper">
+//          <img src={Transactions} alt="Newsfeed" className='nav-img' />
+//         </div>
+//         {newsData.length > 0 && newsData.map((article, index) => (
+//           <Article key={index} articleInfo={article} />
+//         ))}
+//       </div>
+//     );
+//   }
+// }
 
-export default NewsComponent;
+// export default NewsComponent;
 
 
 
