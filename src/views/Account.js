@@ -13,7 +13,7 @@
 
 //   async getNewsData() {
 //     try {
-//       const apiToken = 'D3tkz0oplu4NP8gJ1xcvKuHRXsTWK0jz7SCrNyGS';
+//       const apiToken = 'YOUR_API_TOKEN';
 //       const symbols = 'msft,fb';
 //       const limit = '50';
 
