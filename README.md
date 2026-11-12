@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+Stock Trading App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React front end for a paper stock-trading web app, built as a project for the Coding Temple software engineering bootcamp (2023). Users can sign up, log in, view their account balance, buy and sell stocks, manage watchlists, check stock quotes, and read market news.
 
-## Available Scripts
+The front end talks to a companion Flask REST API running at http://localhost:5000. That back end is not included in this repository, so most pages need it running to show data.
 
-In the project directory, you can run:
+Features
+Sign up and log in — Material UI forms; credentials are sent to the API and stored for later requests using HTTP Basic authentication.
+Buy stock — enter a symbol and quantity, see your current cash balance, and view your order history.
+Trade (sell positions) — list your open positions and sell shares, with checks for invalid quantities and selling more shares than you own.
+Watchlists — search, add, and remove symbols from your watchlists.
+Market data — look up quotes for a stock symbol.
+News — show market news headlines from the API.
+Navigation — Bootstrap navbar with links to each page.
+Getting Started
+Prerequisites
+Node.js (version 16 or later recommended) and npm
+The companion Flask API running at http://localhost:5000 (not included here)
+Installation
+bash
+git clone https://github.com/arou21/Trading-App.git
+cd Trading-App
+npm install
 
-### `npm start`
+Create a .env file in the project root with the API address:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+REACT_APP_API_URI=http://localhost:5000/
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Then start the development server:
 
-### `npm test`
+bash
+npm start
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The app opens at http://localhost:3000.
 
-### `npm run build`
+Pages
+Path	Page	What it does
+/signup	Signup	Create an account
+/signIn	Login	Log in and save credentials
+/buystock	Buystock	Place buy orders and view order history
+/trade	Trade	View positions and sell shares
+/Stockwatch	Stockwatch	Manage watchlists
+/marketdata	MarketData	Look up stock quotes
+/news	News	Read market news
+/account	Account	Account page (currently disabled; see Known Issues)
+API Endpoints Used
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The front end expects these endpoints on the Flask API:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Method	Endpoint	Used by
+POST	/api/signup	Signup
+POST	/api/login	Login
+GET	/account	Buystock, Trade
+GET	/positions	Trade
+GET	/sell-position	Trade
+GET	/api/orders	Buystock
+POST	/api/buystock	Buystock
+GET, POST	/api/watchlist	Stockwatch
+DELETE	/api/watchlist/:id	Stockwatch
+GET	/stock-quotes/:symbol	MarketData
+GET	/api/news	News
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The account and position data shapes in index.d.ts (cash, buying power, position quantity, unrealized profit and loss) follow a paper-trading brokerage account format.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Project Structure
+Trading-App/
+├── public/
+│   └── index.html
+├── src/
+│   ├── App.js          # Routes and login state
+│   ├── api.js          # Account, positions, and sell API calls
+│   ├── fetch.js        # Shared fetch wrapper with Basic auth
+│   ├── component/      # Nav, Article, LogOutButton
+│   └── views/          # One file per page
+├── index.d.ts          # Account and position data types
+└── package.json
+Built With
+React 18 (Create React App)
+React Router 6
+Material UI
+Bootstrap 5 and React Bootstrap
+Axios
+Back end (separate): Flask with a hosted PostgreSQL database
+Known Issues and Possible Improvements
+Account page is disabled. src/views/Account.js is fully commented out, so /account will not render. Restore the page or remove its route and nav link.
+Market data URL is not filled in. MarketData.js builds the URL with regular quotes, so ${symbol} is sent literally. Use backticks for a template string.
+Selling ignores the quantity. api.sellPosition doesn't send the quantity or symbol to the API. Send them as a POST body.
+Watchlist delete uses a relative URL (/api/watchlist/...), so it goes to the React dev server instead of the API.
+API address is hard-coded in several views instead of using REACT_APP_API_URI.
+Credentials are stored in localStorage as Basic auth. A token-based login (for example, JWT) would be safer.
+No automated tests yet. test/test.js is a copy of Trade.js, not a test suite.
+Cleanup: remove the unused files src/Untitled-1.yml and src/Untitled-2.jl.
